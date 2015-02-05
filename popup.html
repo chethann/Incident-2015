@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Incident 2015</title>
+     
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Incident 2015 Events" />
+<meta property="og:description" content="Incident 2015 Events" />
+
+<meta property="og:site_name" content="Incident 2015 Events" />
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="js/jquery.fullscreen-popup.min.js"></script>
+
+<script>
+			$(function() {
+				$(".open-popup").fullScreenPopup({
+					bgColor: '#cccccc'
+				});
+			});
+		</script>
+
+
+<script type="text/javascript">
+  
+  $(document).ready(function() {
+
+
+    $("a.side_menu").click(function() {
+
+    	var menu_id = this.getAttribute("menu-id");
+    	
+        $("#main_content" + menu_id).empty().append("<div id='loading'><p>loading...</p></div>");
+        $("li").removeClass('active');
+        $(this).parent().addClass('active');
+ 
+        $.ajax({
+          url: this.href,
+          success: function( html )
+          {
+            var t = new XMLSerializer().serializeToString(html);
+            $("#main_content" + menu_id).empty().append(t);
+          },    
+    });
+
+
+
+    return false;
+    });
+ 
+
+    	$(".open-popup").click(function(){
+    		var default_link = this.getAttribute("defaultLink");
+    		
+    		var popup_id = this.getAttribute("popupId");
+    		$("#main_content"+ popup_id).empty().append("<div id='loading'><p>loading</p></div>");
+
+
+    		$.ajax({
+		          url: default_link,
+		          success: function( html )
+		          {
+		            var t = new XMLSerializer().serializeToString(html);
+		            $("#main_content" + popup_id).empty().append(t);
+		          },
+        	});
+
+    	});
+
+
+
+    var url = window.location.href.slice(window.location.href.indexOf('#') + 1).split('#');
+  	if( url.length != 0 )
+  	{
+ 	 	var premalink = url.pop();
+ 	 	switch( premalink )
+ 	 	{
+ 	 		case "popup1":
+ 	 			$(".open-popup[id='1']").trigger('click');
+ 	 			break;
+
+ 	 		case "popup2":
+ 	 			$(".open-popup[id='2']").click();
+ 	 			break;
+
+ 	 		default:
+ 	 	}
+  	}
+    
+});
+
+</script>
+		
+		
+	</head>
+	<body>
+    <h1>POP UPs</h1>
+    
+		
+
+		<a class="open-popup" id="1" href="#popup1" defaultLink="tabs/tab1.html" popupId="1">Open popup</a>
+
+		
+
+		<button class="open-popup" id="2" data-popup="#popup2" defaultLink="tabs/tab2.html" popupId="2">Open popup 2</button>
+
+		<div id="popup1" style="display: none; height:100%">
+			<div class="container" style="height:100%;">
+		        <div class="row">
+		          <div class="col-md-3">
+		              <ul class="nav nav-pills nav-stacked" id="sidebar1">
+		                  <li class="active"><a href="tabs/tab1.html" class="side_menu" menu-id = "1">Section 0</a></li>
+		                  <li><a href="tabs/tab2.html" class="side_menu" menu-id = "1">Section 1</a></li>
+		                  <li><a href="tabs/tab3.html" class="side_menu" menu-id = "1">Section 2</a></li>
+		                  <li><a href="tabs/tab4.html" class="side_menu" menu-id = "1">Section 3</a></li>
+		                  <li><a href="tabs/tab5.html" class="side_menu" menu-id = "1">Section 4</a></li>
+		              </ul>            
+		          </div>
+		          <div class="col-md-9">
+		            <div id="main_content1">
+		            </div>
+		          </div>
+		        </div>
+		      </div>
+		</div>
+
+		<div id="popup2" style="display: none; height:100%;">
+			<div class="container" style="height:100%;">
+		        <div class="row">
+		          <div class="col-md-3">
+		              <ul class="nav nav-pills nav-stacked" id="sidebar2">
+		                  <li class="active"><a href="tabs/tab1.html" class="side_menu" menu-id = "2">Section 0</a></li>
+		                  <li><a href="tabs/tab2.html" class="side_menu" menu-id = "2">Section 1</a></li>
+		                  <li><a href="tabs/tab3.html" class="side_menu" menu-id = "2">Section 2</a></li>
+		                  <li><a href="tabs/tab4.html" class="side_menu" menu-id = "2">Section 3</a></li>
+		                  <li><a href="tabs/tab5.html" class="side_menu" menu-id = "2">Section 4</a></li>
+		              </ul>            
+		          </div>
+		          <div class="col-md-9">
+		            <div id="main_content2">
+		            </div>
+		          </div>
+		        </div>
+		      </div>
+		</div>
+		
+
+		
+
+	</body>
+</html>
